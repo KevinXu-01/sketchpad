@@ -1,0 +1,75 @@
+<!-- sketchpad.html --> 
+<!-- Created by 许静宇. --> 
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Skechpad</title>
+
+    <script id="vertex-shader" type="x-shader/x-vertex">
+    attribute vec4 a_Position;
+
+    void
+    main()
+    {
+        gl_Position = a_Position;
+        gl_PointSize = 5.0;
+    }
+    </script>
+
+    <script id="fragment-shader" type="x-shader/x-fragment">
+    precision mediump float;
+    uniform vec4 u_Color;
+    void
+    main()
+    {
+        gl_FragColor = u_Color;
+    }
+    </script>
+
+    <script type="text/javascript" src="webgl-utils.js"></script>
+    <script type="text/javascript" src="initShaders.js"></script>
+    <script type="text/javascript" src="MV.js"></script>
+    <script type="text/javascript" src="sketchpad.js"></script>
+
+
+
+  </head>
+
+  <body>
+    <form name="notice">
+    提示：默认情况下绘制的是点，如需绘制其他图形，请在下方选择；绘制线段时，请绘制两端点；绘制三角形时，请绘制三个顶点；绘制矩形时，请绘制对角线上两顶点；绘制圆时，请绘制圆心和圆上任意一点。
+    </form>
+
+    <canvas id="sketchpad-gl-canvas" width="1000" height="600" onmousedown="mouseDown(event)"
+            onmouseup="mouseUp(event)" onmousemove = "mouseMove(event)">
+    Oops ... your browser doesn't support the HTML5 canvas element
+    </canvas>
+
+    <form name="shapeSelect">
+    形状：<input type="radio" name="shape" value="point" id="point" checked><label for="point">点</label>
+    <input type="radio" name="shape" value="line" id="line"><label for="line">线</label>
+    <input type="radio" name="shape" value="triangle" id="triangle"><label for="triangle">三角形</label>
+    <input type="radio" name="shape" value="rectangle" id="rectangle"><label for="rectangle">矩形</label>
+    <input type="radio" name="shape" value="circle" id="circle"><label for="circle">圆</label>
+    <input type="button" value="确定" onclick="ShapeClicked()">
+    </form>
+
+    <form name="colorSelect">
+    颜色：<input type="radio" name="color" value="black" id="black" checked><label for="black">黑色</label>
+    <input type="radio" name="color" value="white" id="white"><label for="white">白色</label>
+    <input type="radio" name="color" value="red" id="red"><label for="red">红色</label>
+    <input type="radio" name="color" value="pink" id="pink"><label for="pink">粉红色</label>
+    <input type="radio" name="color" value="yellow" id="yellow"><label for="yellow">黄色</label>
+    <input type="radio" name="color" value="green" id="green"><label for="green">绿色</label>
+    <input type="radio" name="color" value="blue" id="blue"><label for="blue">蓝色</label>
+    <input type="radio" name="color" value="purple" id="purple"><label for="purple">紫色</label>
+    <input type="button" value="确定" onclick="ColorClicked()">
+    </form>
+
+    <form name="clear">
+    <input type="button" value="清屏" onclick="Clear()">
+    </form>
+
+  </body>
+</html>
