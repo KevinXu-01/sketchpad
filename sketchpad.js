@@ -75,6 +75,7 @@ function mouseMove(event)
 
 function drawPoint(event)
 {
+    console.log('现在在绘图函数!')
     var c = document.getElementById("sketchpad-gl-canvas")
     var e = event || window.event;
     var x = e.clientX, y = e.clientY;
@@ -87,10 +88,11 @@ function drawPoint(event)
     var len = points.length;
 
     gl.clear( gl.COLOR_BUFFER_BIT );
-    for(let i = 0; i < len; i += 2)
+    var point_buffer = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, point_buffer); gl.bufferData(gl.ARRAY_BUFFER, flatten(points), gl.STATIC_DRAW);
+    gl.vertexAttribPointer(a_Position, 2, gl.FLOAT, false, 0, 0); gl.enableVertexAttribArray(a_Position);
+    for(let i = 0; i < len; i++)
     {
-        gl.vertexAttrib3f(a_Position, points[i], points[i+1], 0.0);
-        gl.drawArrays(gl.POINTS, 0, 1);
+        gl.drawArrays(gl.POINTS, i, 1);
     }
 }
 
@@ -131,7 +133,6 @@ function drawRectangle(event)
     }
     if(ver_num % 2 == 0 && ver_num > 1)
     {
-        points.length = 0;
         rectangle_Points.push(x); rectangle_Points.push(rec_Y);
         rectangle_Points.push(x); rectangle_Points.push(rec_Y);
         rectangle_Points.push(x); rectangle_Points.push(y);
@@ -164,7 +165,6 @@ function drawCircle(event)
     { circle_X.push(x); circle_Y.push(y); }
     if(ver_num % 2 == 0 && ver_num > 1)
     {
-        points.length = 0;
         var radius = Math.sqrt((circle_X[ver_num / 2 - 1] - x) * (circle_X[ver_num / 2 - 1] - x) + (circle_Y[ver_num / 2 - 1] - y) * (circle_Y[ver_num / 2 - 1] - y));
         for(let i = 0; i <= 360; i++)
         {
@@ -210,7 +210,6 @@ function drawTriangle(event)
     }
     if(ver_num % 3 == 0 && ver_num > 1)
     {
-        points.length = 0;
         triangle_Points.push(triangle_X[1]); triangle_Points.push(triangle_Y[1]);
         triangle_Points.push(x); triangle_Points.push(y);
         triangle_Points.push(x); triangle_Points.push(y);
