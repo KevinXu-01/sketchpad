@@ -75,7 +75,6 @@ function mouseMove(event)
 
 function drawPoint(event)
 {
-    console.log('现在在绘图函数!')
     var c = document.getElementById("sketchpad-gl-canvas")
     var e = event || window.event;
     var x = e.clientX, y = e.clientY;
@@ -280,13 +279,13 @@ function ColorClicked()
         {
             gl.uniform4f(u_Color, 1.0, 0.0, 0.0, 1.0);
         }
-        if(document.colorSelect.elements[i].value == "pink" && document.colorSelect.elements[i].checked)
+        if(document.colorSelect.elements[i].value == "sky_blue" && document.colorSelect.elements[i].checked)
         {
-            gl.uniform4f(u_Color, 1.0, 0.75, 0.796, 1.0);
+            gl.uniform4f(u_Color, 0.0, 0.341176, 0.537255, 1.0);
         }
-        if(document.colorSelect.elements[i].value == "yellow" && document.colorSelect.elements[i].checked)
+        if(document.colorSelect.elements[i].value == "orange" && document.colorSelect.elements[i].checked)
         {
-            gl.uniform4f(u_Color, 1.0, 1.0, 0.0, 1.0);
+            gl.uniform4f(u_Color, 1.0, 0.6470588, 0.0, 1.0);
         }
         if(document.colorSelect.elements[i].value == "green" && document.colorSelect.elements[i].checked)
         {
